@@ -105,11 +105,8 @@ class SeoHead extends CWidget
      */
     protected function renderCanonical()
     {
-        $request = Yii::app()->getRequest();
-        $url = $request->getUrl();
-
-        // Make sure that we do not create a recursive canonical redirect.
-        if ($this->_canonical !== $url && $this->_canonical !== $request->getHostInfo().$url)
+        // Make sure the Canonical link is populated before writing it to the page.
+        if ($this->_canonical)
             echo '<link rel="canonical" href="'.$this->_canonical.'" />';
     }
 }
