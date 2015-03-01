@@ -97,16 +97,6 @@ class SeoHead extends CWidget
             echo '<meta property="'.$name.'" content="'.$content.'" />'; // we can't use Yii's method for this.
 
         if ($this->_canonical !== null)
-            $this->renderCanonical();
-    }
-
-    /**
-     * Renders the canonical link tag.
-     */
-    protected function renderCanonical()
-    {
-        // Make sure the Canonical link is populated before writing it to the page.
-        if ($this->_canonical)
             echo '<link rel="canonical" href="'.$this->_canonical.'" />';
     }
 }
