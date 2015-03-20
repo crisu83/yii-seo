@@ -30,6 +30,8 @@ class SeoHead extends CWidget
      */
     public $defaultProperties = array();
 
+    public $titleSeparator = ' | ';
+
     protected $_title;
     protected $_description;
     protected $_keywords;
@@ -44,8 +46,8 @@ class SeoHead extends CWidget
         /* @var SeoBehavior $behavior */
         $behavior = $this->controller->asa('seo');
 
-        if ($behavior !== null && $behavior->metaTitle !== null)
-            $this->_title = $behavior->metaTitle;
+        if ($behavior !== null && $behavior->title !== null)
+            $this->_title = $behavior->title;
         else if ($this->defaultTitle !== null)
             $this->_title = $this->defaultTitle;
 
@@ -82,10 +84,10 @@ class SeoHead extends CWidget
     protected function renderContent()
     {
         foreach ($this->httpEquivs as $name => $content)
-            echo '<meta http-equiv="'.$name.'" content="'.$content.'" />';
+            echo CHtml::metaTag($content, null, $name);
 
-        if ($this->_description !== null)
-            echo CHtml::metaTag($this->_title, 'title');
+        if ($this->_title !== null)
+            echo CHtml::tag('title', array(), is_array($this->_title) ? implode($this->titleSeparator, $this->_title) : $this->_title);
 
         if ($this->_description !== null)
             echo CHtml::metaTag($this->_description, 'description');
@@ -94,9 +96,9 @@ class SeoHead extends CWidget
             echo CHtml::metaTag($this->_keywords, 'keywords');
 
         foreach ($this->_properties as $name => $content)
-            echo '<meta property="'.$name.'" content="'.$content.'" />'; // we can't use Yii's method for this.
+            echo CHtml::tag('meta', array('property' => $name, 'content' => $content));
 
         if ($this->_canonical !== null)
-            echo '<link rel="canonical" href="'.$this->_canonical.'" />';
+            echo CHtml::linkTag('canonical', null, $this->_canonical);
     }
 }

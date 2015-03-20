@@ -1,7 +1,8 @@
 {
     "name": "crisu83/yii-seo",
     "description": "Search engine optimization for the Yii PHP framework.",
-    "keywords": ["seo"],
+    "keywords": ["yii", "seo"],
+    "homepage": "https://github.com/crisu83/yii-seo",
     "type": "yii-extension",
     "license": "BSD-3-Clause",
     "authors": [
