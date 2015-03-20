@@ -9,9 +9,9 @@
 class SeoBehavior extends CBehavior
 {
     /**
-     * @property string the page meta title.
+     * @property string the page title.
      */
-    public $metaTitle;
+    public $title;
     /**
      * @property string the page meta description.
      */
